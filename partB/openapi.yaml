@@ -1,0 +1,274 @@
+openapi: 3.0.3
+info:
+  title: Library Management System API
+  description: |
+    A lightweight REST API for managing book inventory, library members,
+    and loan/return operations.
+
+    **Course**: F CSM311 — Burdaalt 13
+    **Stack**: Node.js + Express + SQLite
+  version: 1.0.0
+  contact:
+    email: otgonbayar.a@must.edu.mn
+
+servers:
+  - url: http://localhost:3000
+    description: Local development server
+
+tags:
+  - name: Books
+    description: Book inventory management
+  - name: Members
+    description: Library member management
+  - name: Loans
+    description: Loan issuance, returns, and overdue tracking
+
+paths:
+  /api/books:
+    get:
+      tags: [Books]
+      summary: List all books
+      parameters:
+        - in: query
+          name: search
+          schema: { type: string }
+          description: Search by title or author
+        - in: query
+          name: available
+          schema: { type: boolean }
+          description: Filter by availability
+      responses:
+        '200':
+          description: List of books
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items: { $ref: '#/components/schemas/Book' }
+    post:
+      tags: [Books]
+      summary: Add a new book
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/BookInput' }
+      responses:
+        '201':
+          description: Book created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: { $ref: '#/components/schemas/Book' }
+                  message: { type: string }
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '409':
+          $ref: '#/components/responses/ConflictError'
+
+  /api/books/{id}:
+    get:
+      tags: [Books]
+      summary: Get a book by ID
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: Book record
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data: { $ref: '#/components/schemas/Book' }
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+    put:
+      tags: [Books]
+      summary: Update a book
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      requestBody:
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/BookInput' }
+      responses:
+        '200':
+          description: Updated book
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+    delete:
+      tags: [Books]
+      summary: Delete a book
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: Book deleted
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '422':
+          $ref: '#/components/responses/UnprocessableError'
+
+  /api/members:
+    get:
+      tags: [Members]
+      summary: List all members
+      parameters:
+        - in: query
+          name: active
+          schema: { type: boolean }
+      responses:
+        '200':
+          description: List of members
+    post:
+      tags: [Members]
+      summary: Register a new member
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/MemberInput' }
+      responses:
+        '201':
+          description: Member registered
+        '409':
+          $ref: '#/components/responses/ConflictError'
+
+  /api/members/{id}:
+    get:
+      tags: [Members]
+      summary: Get member with loan history
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: Member with loans
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+
+  /api/members/{id}/deactivate:
+    patch:
+      tags: [Members]
+      summary: Deactivate a member
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: Member deactivated
+        '422':
+          $ref: '#/components/responses/UnprocessableError'
+
+  /api/loans:
+    get:
+      tags: [Loans]
+      summary: List all active loans
+      responses:
+        '200':
+          description: Active loans
+    post:
+      tags: [Loans]
+      summary: Issue a book to a member
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/LoanInput' }
+      responses:
+        '201':
+          description: Loan created
+        '422':
+          $ref: '#/components/responses/UnprocessableError'
+
+  /api/loans/overdue:
+    get:
+      tags: [Loans]
+      summary: Get overdue loans
+      responses:
+        '200':
+          description: Overdue loans with days_overdue field
+
+  /api/loans/{id}/return:
+    patch:
+      tags: [Loans]
+      summary: Mark a loan as returned
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: Book returned
+        '422':
+          $ref: '#/components/responses/UnprocessableError'
+
+components:
+  parameters:
+    IdParam:
+      in: path
+      name: id
+      required: true
+      schema: { type: integer, minimum: 1 }
+
+  schemas:
+    Book:
+      type: object
+      properties:
+        id:         { type: integer }
+        isbn:       { type: string }
+        title:      { type: string }
+        author:     { type: string }
+        genre:      { type: string }
+        available:  { type: integer, enum: [0, 1] }
+        created_at: { type: string, format: date-time }
+
+    BookInput:
+      type: object
+      required: [title, author]
+      properties:
+        title:  { type: string }
+        author: { type: string }
+        isbn:   { type: string }
+        genre:  { type: string }
+
+    MemberInput:
+      type: object
+      required: [name, email]
+      properties:
+        name:  { type: string }
+        email: { type: string, format: email }
+
+    LoanInput:
+      type: object
+      required: [bookId, memberId, dueDate]
+      properties:
+        bookId:   { type: integer }
+        memberId: { type: integer }
+        dueDate:  { type: string, format: date }
+
+  responses:
+    ValidationError:
+      description: Input validation failed
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:   { type: string }
+              details: { type: array }
+    NotFoundError:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error: { type: string }
+              code:  { type: string }
+    ConflictError:
+      description: Duplicate resource
+    UnprocessableError:
+      description: Business rule violation
