@@ -1,16 +1,14 @@
 # AI Planning Session Log
 
-**Course**: F CSM311 — Burdaalt 13
+**Course**: F CSM311 — Biydaalt 13
 **Phase**: A (Plan)
-**Date**: 2025-05-08
-**Tool**: Claude (Anthropic)
+**Date**: 2025-05-06
 
 ---
 
 ## Session Summary
 
-This document summarizes the AI-assisted planning session used to design
-the Library Management System before any code was written.
+Энэхүү баримт бичигт ямар нэгэн код бичихээс өмнө Номын сангийн удирдлагын системийг зохион бүтээхэд ашигласан хиймэл оюун ухааны тусламжтайгаар төлөвлөлтийн сессийг нэгтгэн дүгнэсэн болно.
 
 ---
 
