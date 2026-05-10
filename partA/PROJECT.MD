@@ -1,13 +1,9 @@
 # Library Management System
 
 ## Brief
-A lightweight personal library management system that allows users to track their book
-inventory, manage members, and handle book loan/return operations — all through a
-clean REST API with a minimal web frontend.
-
+Хэрэглэгчдэд номынхоо нөөцийг хянах, гишүүдийг удирдах, номын зээл/буцаан олголтын үйл ажиллагааг зохицуулах боломжийг олгодог жижиг хэмжээний хувийн номын сангийн удирдлагын систем нь хамгийн бага вэб фронтенд бүхий цэвэр REST API-аар дамжуулан хийхийг зорьсон.
 ## Scope
-This project covers the core operations of a small library or personal book collection:
-adding and searching books, registering members, issuing loans, and tracking overdue items.
+Энэ төсөл нь жижиг номын сан эсвэл хувийн номын цуглуулгын үндсэн үйл ажиллагааг хамардаг: ном нэмэх, хайх, гишүүдийг бүртгэх, зээл олгох, хугацаа хэтэрсэн зүйлсийг хянах.
 
 ## Features (3–5 required)
 | # | Feature | Description |
@@ -19,10 +15,10 @@ adding and searching books, registering members, issuing loans, and tracking ove
 | 5 | **Search & Filter** | Full-text search across books and filter by availability |
 
 ## Out of Scope
-- Payment / fine collection system
-- Email notification service
-- Multi-branch library support
-- Authentication / authorization (MVP only)
+- Төлбөр / торгуулийн систем
+- Имэйл мэдэгдлийн үйлчилгээ
+- Олон салбарын номын сангийн дэмжлэг
+- Баталгаажуулалт / зөвшөөрөл (MVP)
 
 ## Team
-Solo developer — F CSM311 Burdaalt 13
+Solo developer — F CSM311 biydaalt 13 G.Oyungerel/B232270802/

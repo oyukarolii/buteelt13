@@ -1,6 +1,6 @@
 # ADR-001: Technology Stack Selection
 
-**Date**: 2025-05-08
+**Date**: 2025-05-06
 **Status**: Accepted
 **Deciders**: Solo developer (F CSM311)
 
@@ -8,15 +8,15 @@
 
 ## Context
 
-We need to select a backend stack for a library management REST API.
-The system requires CRUD operations for books, members, and loans,
-with at least 10 unit tests and a clean project structure.
+Бид номын сангийн удирдлагын REST API-д зориулсан backend стекийг сонгох хэрэгтэй.
+Систем нь ном, гишүүд болон зээлд зориулсан CRUD үйлдлүүдийг шаарддаг бөгөөд
+дор хаяж 10 unit tests, цэвэр төслийн бүтэцтэй.
 
-Key constraints:
-- Solo developer, academic project
-- Must support a proper Testing Pyramid (unit + integration tests)
-- Needs to be set up and running within one session
-- SQLite is preferred (no external DB server setup)
+Гол хязгаарлалтууд:
+- Бие даасан хөгжүүлэгч, эрдэм шинжилгээний төсөл
+- Зөв туршилтын пирамид (нэгж + интеграцийн тест)-ийг дэмжих ёстой
+- Нэг сессийн дотор тохируулж, ажиллуулах шаардлагатай
+- SQLite-г илүүд үздэг (гадаад мэдээллийн сангийн серверийн тохиргоо байхгүй)
 
 ---
 
@@ -29,20 +29,20 @@ Key constraints:
 ## Rationale
 
 ### Node.js over Python (FastAPI)
-- Higher personal familiarity → faster feature development
-- Same language can be reused for any frontend work
-- `better-sqlite3` is synchronous and simple — no async DB complexity
+- Higher personal familiarity → функцийг илүү хурдан хөгжүүлэх
+- Ижил хэлийг ямар ч фронтенд ажилд дахин ашиглаж болно
+- `better-sqlite3`синхрон бөгөөд энгийн — асинхрон мэдээллийн сангийн нарийн төвөгтэй байдал байхгүй
 
 ### Express over alternatives (Fastify, Koa)
-- Most widely documented framework for REST APIs in Node.js
-- Middleware ecosystem is mature (`express-validator`, `cors`, `morgan`)
+- Node.js дахь REST API-уудын хамгийн өргөн баримтжуулсан хүрээ
+- Дунд програм хангамжийн экосистем боловсорч гүйцсэн(`express-validator`, `cors`, `morgan`)
 - Supertest integration is battle-tested
 
 ### SQLite over PostgreSQL / MySQL
 - Zero configuration — single `.db` file
-- Sufficient for a single-user academic project
-- No connection pooling or server management needed
-- Easy to reset during development (`rm library.db && npm run db:init`)
+- Ганц хэрэглэгчийн эрдэм шинжилгээний төсөлд хангалттай
+- Холболтын сан байгуулах эсвэл серверийн удирдлага шаардлагагүй
+- Хөгжүүлэлтийн явцад дахин тохируулахад хялбар (`rm library.db && npm run db:init`)
 
 ### Jest + Supertest for testing
 - Jest is the de facto standard for Node.js unit testing
@@ -59,14 +59,13 @@ Key constraints:
 - Excellent testing tooling satisfies the Testing Pyramid requirement
 
 ### Negative
-- SQLite does not support concurrent writes — not production-scalable
-- No built-in type safety (mitigated with JSDoc annotations)
-- Express requires manual boilerplate vs FastAPI's auto-generated docs
+- SQLite нь зэрэгцээ бичихийг дэмждэггүй — үйлдвэрлэлийн хэмжээнд тохируулж болохгүй.
+- Суурилуулсан төрлийн аюулгүй байдал байхгүй (JSDoc тэмдэглэгээгээр багасгасан)
+- Express нь FastAPI-ийн автоматаар үүсгэсэн баримт бичгийн эсрэг гарын авлагын загвар шаарддаг.
 
 ### Mitigations
-- SQLite limitation is acceptable for academic scope
-- JSDoc + ESLint provide sufficient type guidance
-- Swagger/OpenAPI docs can be added later if needed
+- JSDoc + ESLint нь хангалттай төрлийн зааварчилгаа өгдөг.
+- Шаардлагатай бол Swagger/OpenAPI баримт бичгүүдийг дараа нь нэмж болно.
 
 ---
 

@@ -1,12 +1,12 @@
 # Stack Comparison — Library Management System
 
-Three candidate stacks were evaluated before selecting the final technology.
+Эцсийн технологийг сонгохоос өмнө гурван нэр бүхий стекийг үнэлсэн.
 
 ---
 
 ## Candidate Stacks
 
-| Criteria | Stack A ✅ | Stack B | Stack C |
+| Criteria | Stack A  | Stack B | Stack C |
 |----------|-----------|---------|---------|
 | **Runtime** | Node.js 20 | Python 3.12 | Go 1.22 |
 | **Framework** | Express 4 | FastAPI | Gin |
@@ -37,12 +37,12 @@ Three candidate stacks were evaluated before selecting the final technology.
 ## Selected Stack: Node.js + Express + SQLite
 
 ### Reasons
-1. **Highest familiarity** — less time spent on syntax, more on features
-2. **Jest + Supertest** — excellent combo for unit + integration testing (supports Testing Pyramid)
-3. **npm ecosystem** — `better-sqlite3`, `express-validator`, `nodemon` all available instantly
-4. **Single language** — JS for both API and any future frontend work
-5. **SQLite** — zero-config, file-based DB ideal for a solo project with no concurrency needs
+1. **Highest familiarity** — синтакс дээр бага цаг зарцуулж, функцуудад илүү их цаг зарцуулах
+2. **Jest + Supertest** — unit + integration туршилтийн том хослол (Туршилтын пирамидыг дэмжинэ)
+3. **npm ecosystem** — `better-sqlite3`, `express-validator`, `nodemon` бүгдийн шууд авах боломжтой
+4. **Single language** — API болон ирээдүйн аливаа фронтенд ажилд зориулсан JS
+5. **SQLite** — 0 тохиргоотой, файлд суурилсан мэдээллийн сан нь зэрэгцээ ажиллах шаардлагагүй ганцаарчилсан төсөлд тохиромжтой
 
 ### Trade-offs Accepted
-- Go would be faster at runtime, but the development speed advantage of Node.js outweighs this for a solo academic project
-- Python/FastAPI would also be a solid choice; ruled out only because Node.js familiarity is higher
+- Ажиллах үед Go илүү хурдан байх боловч Node.js-ийн хөгжүүлэлтийн хурдны давуу тал нь ганцаарчилсан академик төслийн хувьд үүнээс илүү юм.
+- Python/FastAPI нь бас сайн сонголт байх болно; зөвхөн Node.js-ийн танил байдал өндөр байгаа тул хасагдсан.

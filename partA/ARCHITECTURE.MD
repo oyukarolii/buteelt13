@@ -2,7 +2,7 @@
 
 ## Module Overview
 
-The system is divided into three layers: **API (Routes)**, **Service (Business Logic)**,
+Систем нь гурван давхаргад хуваагддаг: **API (Routes)**, **Service (Business Logic)**,
 and **Data (SQLite via better-sqlite3)**.
 
 ---
@@ -11,8 +11,8 @@ and **Data (SQLite via better-sqlite3)**.
 
 ```mermaid
 graph TD
-    Client["🌐 Client (Browser / curl)"]
-    Router["Express Router\n/api/books\n/api/members\n/api/loans"]
+    Үйлчлүүлэгч[" Client (Browser / curl)"]
+    Чиглүүлэгч["Express Router\n/api/books\n/api/members\n/api/loans"]
     BooksService["BooksService\n- addBook()\n- searchBooks()\n- deleteBook()"]
     MembersService["MembersService\n- registerMember()\n- getMember()\n- deactivate()"]
     LoansService["LoansService\n- issueLoan()\n- returnBook()\n- getOverdue()"]
