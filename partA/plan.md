@@ -1,4 +1,4 @@
-# AI Planning Session Log
+y# AI Planning Session Log
 
 **Course**: F CSM311 — Biydaalt 13
 **Phase**: A (Plan)

@@ -1,6 +1,6 @@
 # Library Management System — Build Phase
 
-> F CSM311 — Burdaalt 13 | Phase B: Implementation
+> F CSM311 — Biydaalt 13 | Phase B: Implementation
 
 ## Quick Start
 

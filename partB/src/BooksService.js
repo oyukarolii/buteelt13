@@ -1,12 +1,10 @@
 const { getDb } = require('../db/db');
 
 /**
- * Service layer for book inventory management.
- * Handles all business logic for CRUD operations on books.
  */
 class BooksService {
   /**
-   * Retrieve all books, with optional search and availability filter.
+   
    *
    * @param {object} filters - Optional query filters
    * @param {string} [filters.search] - Search term matched against title and author
@@ -34,7 +32,6 @@ class BooksService {
   }
 
   /**
-   * Find a single book by its ID.
    *
    * @param {number} id - The book's primary key
    * @returns {object|undefined} The book record, or undefined if not found

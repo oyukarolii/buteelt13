@@ -10,11 +10,11 @@
 ## What was built in this session
 
 ### Features implemented
-1. `BooksService.js` — Book CRUD, search, availability check, duplicate ISBN guard
-2. `MembersService.js` — Member registration, deactivation, active loan guard
-3. `LoansService.js` — Issue with transaction, return, overdue detection
-4. Express routes for all 3 resources
-5. Central error handler with OWASP-safe error responses
+1. `BooksService.js` — CRUD захиалах, хайлт хийх, бэлэн байдлыг шалгах, ISBN хамгаалалтын давхардлыг захиалах
+2. `MembersService.js` — Гишүүнчлэлийн бүртгэл, идэвхгүй болгох, идэвхтэй зээлийн хамгаалагч
+3. `LoansService.js` — Гүйлгээ, буцаалт, хугацаа хэтэрсэн баримт илрүүлэхтэй холбоотой асуудал
+4. Бүх 3 нөөцийн экспресс маршрутууд
+5. OWASP-аас аюулгүй алдааны хариу үйлдэлтэй төв алдааны зохицуулагч
 
 ### Tests generated (AI, human-reviewed)
 - `BooksService.test.js` — 7 tests
@@ -27,7 +27,7 @@ real SQL runs in memory, which tests actual query correctness.
 
 ---
 
-## Prompts used
+## Ашигласан prompt
 
 **Prompt 1** — Architecture confirmation
 > "Node.js + Express + SQLite. 5 features: book inventory, members, loans, return/overdue, search. Implement BooksService first with full JSDoc."
